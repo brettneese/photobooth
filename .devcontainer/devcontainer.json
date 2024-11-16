@@ -1,0 +1,15 @@
+{
+  "name": "Python 3.4 Development",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "python34-app",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python"],
+      "settings": {
+        "python.pythonPath": "/usr/local/bin/python3"
+      }
+    }
+  },
+  "remoteUser": "root"
+}
