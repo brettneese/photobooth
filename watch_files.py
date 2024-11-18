@@ -6,7 +6,7 @@ import sys
 from datetime import datetime
 
 # Path to the directory to monitor (e.g., network drive)
-directory_path = r"C:\Documents and Settings\Brett\Desktop\photos"
+directory_path = r"\\VBoxSvr\uploads"
 
 # Polling interval in seconds
 poll_interval = 1
@@ -25,7 +25,7 @@ logging.basicConfig(
 )
 
 # Add at the top with other constants
-OUTPUT_DIRECTORY = r"C:\Documents and Settings\Brett\Desktop\photos\out"  # Define the destination directory
+OUTPUT_DIRECTORY = r"\\VBoxSvr\uploads\out"  # Define the destination directory
 
 def get_file_info(filepath):
     try:
