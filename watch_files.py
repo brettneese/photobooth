@@ -4,7 +4,6 @@ import logging
 import signal
 import sys
 from datetime import datetime
-from PIL import Image, ImageWin  # Ensure Pillow is installed and compatible
 
 # Path to the directory to monitor (e.g., network drive)
 directory_path = r"\\VBoxSvr\uploads"
@@ -39,17 +38,10 @@ def get_file_info(filepath):
         logging.error("Error getting file info for {0}: {1}".format(filepath, e))
         return None
 
-def print_image(image):
+def print_image(file_path):
     try:
-        # Save the image to a temporary file
-        temp_file = os.path.join(directory_path, "temp_print_image.bmp")
-        image.save(temp_file, "BMP")
-
         # Use the Windows command line to print the image
-        os.system('rundll32.exe C:\\WINDOWS\\system32\\shimgvw.dll,ImageView_PrintTo /pt "{0}" "Printer"'.format(temp_file))
-
-        # Remove the temporary file
-        os.remove(temp_file)
+        os.system('rundll32.exe C:\\WINDOWS\\system32\\shimgvw.dll,ImageView_PrintTo /pt "{0}" "Printer"'.format(file_path))
         logging.info("Printed image successfully")
     except Exception as e:
         logging.error("Error printing image: {0}".format(e))
@@ -83,10 +75,7 @@ def check_new_files():
                 try:
                     # Check if the file is an image
                     if file.lower().endswith(('.jpg')):
-                        img = Image.open(source_path)
-                        print_image(img)
-                        # Close the image
-                        img.close()
+                        print_image(source_path)
                     else:
                         logging.warning("File {0} is not an image, skipping processing.".format(file))
                 except Exception as e:
